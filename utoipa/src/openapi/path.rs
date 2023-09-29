@@ -1,7 +1,7 @@
 //! Implements [OpenAPI Path Object][paths] types.
 //!
 //! [paths]: https://spec.openapis.org/oas/latest.html#paths-object
-use std::iter;
+use std::{iter, collections::HashMap};
 
 use serde::{Deserialize, Serialize};
 use serde_json::Value;
@@ -295,6 +295,9 @@ builder! {
         /// Alternative [`Server`]s for this [`Operation`].
         #[serde(skip_serializing_if = "Option::is_none")]
         pub servers: Option<Vec<Server>>,
+
+        #[serde(flatten)]
+        pub extensions: HashMap<String, Value>,
     }
 }
 
